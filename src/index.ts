@@ -48,7 +48,7 @@ const defaultProps: HelmAddOnProps = {
     version: '1.0.0-latest',
     chart: "chart",
     release: "gmaestro",
-    repository: "https://kirshenboim.github.io/gmaestro"
+    repository: "https://granulate.github.io/gmaestro-helm"
 };
 
 
