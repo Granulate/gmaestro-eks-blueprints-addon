@@ -1,6 +1,6 @@
 # gMaestro AddOn for Amazon EKS Blueprints
 
-This repository contains the source code for the gMaestro AddOn for [Amazon EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/). This AddOn is a [CDK](https://aws.amazon.com/cdk/) construct that makes it easy for customers to add Gmaestro to their Amazon EKS clusters.
+This repository contains the source code for the gMaestro AddOn for [Amazon EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/). This AddOn is a [CDK](https://aws.amazon.com/cdk/) construct that allows customers to add Gmaestro to their Amazon EKS clusters.
 
 gMaestro is a Kubernetes cost optimization solution that helps companies reduce spending on unutilized resources by up to 60%.
 With gMaestro, you gain full visibility into K8s clusters, seamlessly interact with HPA scaling policies, and achieve your cost-performance goals by applying custom rightsizing recommendations based on actual usage in production.
@@ -8,17 +8,19 @@ With gMaestro, you gain full visibility into K8s clusters, seamlessly interact w
 2. **Multi-cluster visibility** - Gain visibility into each controller, resource request, container, HPA policy, utilization, and cost.
 3. **Apply custom recommendations** - gMaestro generates custom recommendations by analyzing the actual utilization of each controller.
 
+For additional information, visit [gMaestro documentation](https://gmaestro.gitbook.io/gmaestro-docs/).
+
 ## Prerequisite 
-To use gMaestro, first you need to:
+To use gMaestro, first, you need to:
 1. [Sign up](https://app.granulate.io/gMaestroSignup) to gMaestro platform
-2. Retrieve your unique user’s token - After signing up to gMaestro it can be found in the [Deploy](https://app.granulate.io/deploy) on the left-hand menu.
+2. Download a sample YAML file - After signing up to gMaestro, navigate to the [Deploy](https://app.granulate.io/deploy) on the left-hand menu, fill in the required fields and click on "Generate Config File" 
 
 
 ## Usage
 
 ```typescript
 import 'source-map-support/register';
-import * as cdk from 'aws-cdk-lib';
+import * as CDK from 'aws-cdk-lib';
 import * as blueprints from '@aws-quickstart/eks-blueprints';
 
 const app = new cdk.App();
@@ -53,39 +55,37 @@ kube-system   kube-proxy-js5pn                     1/1     Running   0          
 After a few seconds, you will gain full visibility into your K8s cluster objects.
 First rightsizing recommendations may take up to 5 minutes to load.
 
-
-
 ## `gMaestroAddOn` Required (props)
-you may get the following parameters after [signup to Gmaestro](https://app.granulate.io/gMaestroSignup) and generate config file from the Deploy page
+Take the following parameter from the sample YAML file that was downloaded.
+
+#### `b64ClientId: string`
+
+copy from the Deployment section `MAESTRO_CLIENT_ID` value
+
+#### `clientName: string`
+
+Copy from the ConfigMap section `prometheus.configs.scrape_configs.static_configs.labels.client_name` value
+
+#### `clusterName: string`
+
+copy from the Deployment section `MAESTRO_SERVICE_NAME` value
 
 #### `namespace: string` (optional)
 
 The namespace where gMaestro will be installed. `default` namespace is used as dafault.
 
-#### `b64ClientId: string`
-
-copy from the Deployment yaml the MAESTRO_CLIENT_ID value
-
-#### `clientName: string`
-
-copy from the ConfigMap yaml the prometheus.configs.scrape_configs.static_configs.labels.client_name value
-
-#### `serviceName: string`
-
-copy from the Deployment yaml the MAESTRO_SERVICE_NAME value
-
 #### `grafanaMetricsAuthKey: string`
 
-copy from the ConfigMap yaml the prometheus.configs.remote_write.basic_auth.password value
+Copy from the ConfigMap section `prometheus.configs.remote_write.basic_auth.password` value.
 
 #### `grafanaLogsAuthKey: string`
 
-copy from the ConfigMap yaml the loki.configs.clients.basic_auth.password value
+Copy from the ConfigMap section `loki.configs.clients.basic_auth.password` value
 
 ## Support
 
-If you have any questions about Gmaestro, catch us [on Slack](https://granulatecommunity.slack.com/archives/C03RK0HN2TU)!
+If you have questions about Gmaestro, catch us [on Slack](https://granulatecommunity.slack.com/archives/C03RK0HN2TU)!
 
 ## License
 
-The Gmaestro AddOn is licensed under the Apache 2.0 license.
+The gMaestro AddOn is licensed under the Apache 2.0 license.
