@@ -46,7 +46,7 @@ const defaultProps: HelmAddOnProps = {
     name: "gmaestro-addon",
     namespace: "default",
     version: '1.0.0-latest',
-    chart: "chart",
+    chart: "gmaestro",
     release: "gmaestro",
     repository: "https://granulate.github.io/gmaestro-helm"
 };
