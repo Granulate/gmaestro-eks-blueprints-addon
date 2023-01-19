@@ -1,10 +1,18 @@
-# Gmaestro AddOn for Amazon EKS Blueprints
+# gMaestro AddOn for Amazon EKS Blueprints
 
-This repository contains the source code for the Gmaestro AddOn for [Amazon EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/). This AddOn is a [CDK](https://aws.amazon.com/cdk/) construct that makes it easy for customers to add Gmaestro to their Amazon EKS clusters.
+This repository contains the source code for the gMaestro AddOn for [Amazon EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/). This AddOn is a [CDK](https://aws.amazon.com/cdk/) construct that makes it easy for customers to add Gmaestro to their Amazon EKS clusters.
 
-[Amazon EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/) is a framework that allows customers to create internal development platforms. It abstracts the complexities of cloud infrastructure from developers, and allows them to deploy workloads with ease
+gMaestro is a Kubernetes cost optimization solution that helps companies reduce spending on unutilized resources by up to 60%.
+With gMaestro, you gain full visibility into K8s clusters, seamlessly interact with HPA scaling policies, and achieve your cost-performance goals by applying custom rightsizing recommendations based on actual usage in production.
+1. **Install gMaestro** - As a single pod on your cluster with a single command line.
+2. **Multi-cluster visibility** - Gain visibility into each controller, resource request, container, HPA policy, utilization, and cost.
+3. **Apply custom recommendations** - gMaestro generates custom recommendations by analyzing the actual utilization of each controller.
 
-gMaestro reduces costs and manual R&D efforts by enabling dynamic scaling, complementing HPA and rightsizing workloads and nodes - Reduce your Kubernetes costs by up to 60%. see the [product and technical docs](https://granulate.io/gmaestro/).
+## Prerequisite 
+To use gMaestro, first you need to:
+1. [Sign up](https://app.granulate.io/gMaestroSignup) to gMaestro platform
+2. Retrieve your unique user’s token - After signing up to gMaestro it can be found in the [Deploy](https://app.granulate.io/deploy) on the left-hand menu.
+
 
 ## Usage
 
@@ -29,10 +37,10 @@ const blueprint = blueprints.EksBlueprint.builder()
   .build(app, 'my-stack-name');
 ```
 
-To validate that Gmaestro add-on is running ensure that the add-on deployment `granulate-maestro` in `RUNNING` state:
+Use the following command to validate that gMaesto installed successfully:
 
 ```bash
-$ kubectl get pods -A
+$ ubectl get pods --all-namespaces | grep granulate-maestro
 NAMESPACE     NAME                                 READY   STATUS    RESTARTS   AGE
 default       granulate-maestro-6947dc87bc-k5nfc   2/2     Running   0          11m
 kube-system   aws-node-9rhgx                       1/1     Running   0          16m
@@ -41,17 +49,17 @@ kube-system   coredns-d5b9bfc4-r5sdb               1/1     Running   0          
 kube-system   kube-proxy-js5pn                     1/1     Running   0          16m
 ```
 
-Note that the agent is created in provided namespace (defaults to `default`).
+After a few seconds, you will gain full visibility into your K8s cluster objects.
+First rightsizing recommendations may take up to 5 minutes to load.
 
-Once deployed, it allows us to give you resource recommandations to optimize your cluster.
 
 
-## `GmaestroAddOn` Required (props)
+## `gMaestroAddOn` Required (props)
 you may get the following parameters after [signup to Gmaestro](https://app.granulate.io/gMaestroSignup) and generate config file from the Deploy page
 
 #### `namespace: string` (optional)
 
-The namespace where Gmaestro will be installed. Defaults to `default`.
+The namespace where gMaestro will be installed. `default` namespace is used as dafault.
 
 #### `b64ClientId: string`
 
