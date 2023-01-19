@@ -40,7 +40,8 @@ const blueprint = blueprints.EksBlueprint.builder()
 Use the following command to validate that gMaesto installed successfully:
 
 ```bash
-$ ubectl get pods --all-namespaces | grep granulate-maestro
+$ kubectl get pods --all-namespaces | grep granulate-maestro
+
 NAMESPACE     NAME                                 READY   STATUS    RESTARTS   AGE
 default       granulate-maestro-6947dc87bc-k5nfc   2/2     Running   0          11m
 kube-system   aws-node-9rhgx                       1/1     Running   0          16m
