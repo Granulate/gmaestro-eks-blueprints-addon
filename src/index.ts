@@ -24,9 +24,9 @@ export interface GmaestroAddOnProps extends HelmAddOnUserProps {
     clientName: string;
 
     /**
-     * plain text service name.
+     * plain text cluster name.
      */
-    serviceName: string;
+    clusterName: string;
 
     /**
      * plain text grafana metrics auth key.
@@ -59,8 +59,8 @@ export class GmaestroAddOn extends HelmAddOn {
     constructor(props?: GmaestroAddOnProps) {
         super({...defaultProps, ...props});
         this.options = this.props as GmaestroAddOnProps;
-        if (!this.options.b64ClientId || !this.options.clientName || !this.options.serviceName || !this.options.grafanaMetricsAuthKey || !this.options.grafanaLogsAuthKey) {
-            throw new Error(`b64ClientId, clientName, serviceName, grafanaMetricsAuthKey, grafanaLogsAuthKey are Gmaestro addon required fields. 
+        if (!this.options.b64ClientId || !this.options.clientName || !this.options.clusterName || !this.options.grafanaMetricsAuthKey || !this.options.grafanaLogsAuthKey) {
+            throw new Error(`b64ClientId, clientName, clusterName, grafanaMetricsAuthKey, grafanaLogsAuthKey are Gmaestro addon required fields. 
             Please copy those values form the gmaestro deployment Yaml file (Signup to gmaestro before and generate yaml from the Deploy page).`);
         }
     }
@@ -90,7 +90,7 @@ function populateValues(helmOptions: GmaestroAddOnProps): Values {
     setPath(values, "namespace", helmOptions.namespace);
     setPath(values, "b64ClientId", helmOptions.b64ClientId);
     setPath(values, "clientName", helmOptions.clientName);
-    setPath(values, "serviceName", helmOptions.serviceName);
+    setPath(values, "clusterName", helmOptions.clusterName);
     setPath(values, "secrets.grafanaMetricsAuthKey", helmOptions.grafanaMetricsAuthKey);
     setPath(values, "secrets.grafanaLogsAuthKey", helmOptions.grafanaLogsAuthKey);
 
