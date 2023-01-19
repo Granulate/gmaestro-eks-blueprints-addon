@@ -1,6 +1,6 @@
 # gMaestro AddOn for Amazon EKS Blueprints
 
-This repository contains the source code for the gMaestro AddOn for [Amazon EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/). This AddOn is a [CDK](https://aws.amazon.com/cdk/) construct that allows customers to add Gmaestro to their Amazon EKS clusters.
+This repository contains the source code for the gMaestro AddOn for [Amazon EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/). This AddOn is a [CDK](https://aws.amazon.com/cdk/) construct that allows customers to add gMaestro to their Amazon EKS clusters.
 
 gMaestro is a Kubernetes cost optimization solution that helps companies reduce spending on unutilized resources by up to 60%.
 With gMaestro, you gain full visibility into K8s clusters, seamlessly interact with HPA scaling policies, and achieve your cost-performance goals by applying custom rightsizing recommendations based on actual usage in production.
@@ -11,8 +11,8 @@ With gMaestro, you gain full visibility into K8s clusters, seamlessly interact w
 For additional information, visit [gMaestro documentation](https://gmaestro.gitbook.io/gmaestro-docs/).
 
 ## Prerequisite 
-To use gMaestro, first, you need to:
-1. [Sign up](https://app.granulate.io/gMaestroSignup) to gMaestro platform
+Before using gMaestro, you need to:
+1. [Sign up](https://app.granulate.io/gMaestroSignup) to the gMaestro platform
 2. Download a sample YAML file - After signing up to gMaestro, navigate to the [Deploy](https://app.granulate.io/deploy) on the left-hand menu, fill in the required fields and click on "Generate Config File" 
 
 
@@ -39,7 +39,7 @@ const blueprint = blueprints.EksBlueprint.builder()
   .build(app, 'my-stack-name');
 ```
 
-Use the following command to validate that gMaesto installed successfully:
+Use the following command to validate that gMaestro installed successfully:
 
 ```bash
 $ kubectl get pods --all-namespaces | grep granulate-maestro
@@ -53,14 +53,14 @@ kube-system   kube-proxy-js5pn                     1/1     Running   0          
 ```
 
 After a few seconds, you will gain full visibility into your K8s cluster objects.
-First rightsizing recommendations may take up to 5 minutes to load.
+The first rightsizing recommendations may take up to 5 minutes to load.
 
 ## `gMaestroAddOn` Required (props)
 Take the following parameter from the sample YAML file that was downloaded.
 
 #### `b64ClientId: string`
 
-copy from the Deployment section `MAESTRO_CLIENT_ID` value
+Copy from the Deployment section `MAESTRO_CLIENT_ID` value
 
 #### `clientName: string`
 
@@ -68,11 +68,11 @@ Copy from the ConfigMap section `prometheus.configs.scrape_configs.static_config
 
 #### `clusterName: string`
 
-copy from the Deployment section `MAESTRO_SERVICE_NAME` value
+Copy from the Deployment section `MAESTRO_SERVICE_NAME` value
 
 #### `namespace: string` (optional)
 
-The namespace where gMaestro will be installed. `default` namespace is used as dafault.
+The namespace where gMaestro will be installed. `default` namespace is used as default.
 
 #### `grafanaMetricsAuthKey: string`
 
