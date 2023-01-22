@@ -28,7 +28,7 @@ const app = new cdk.App();
 const addOn = new blueprints.addons.Gmaestro({
         b64ClientId: "<client id>",
         clientName: "<client name>",
-        serviceName: "<service name>",
+        clusterName: "<cluster name>",
         namespace: "<namespace>",
         grafanaMetricsAuthKey: "<grafana metrics auth key>",
         grafanaLogsAuthKey: "<grafana logs auth key>",
