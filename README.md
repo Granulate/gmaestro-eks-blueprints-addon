@@ -30,8 +30,8 @@ const addOn = new blueprints.addons.Gmaestro({
         clientName: "<client name>",
         clusterName: "<cluster name>",
         namespace: "<namespace>",
-        grafanaMetricsAuthKey: "<grafana metrics auth key>",
-        grafanaLogsAuthKey: "<grafana logs auth key>",
+        grafanaMetricsSecretName: "<grafana metrics secret name>", // Create and copy from gMaestro deployment yaml
+        grafanaLogsSecretName: "<grafana logs secret name>", // Create and copy from gMaestro deployment yaml
     });
 
 const blueprint = blueprints.EksBlueprint.builder()
