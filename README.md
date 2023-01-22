@@ -16,6 +16,14 @@ Before using gMaestro, you need to:
 2. Download a sample YAML file - After signing up to gMaestro, navigate to the [Deploy](https://app.granulate.io/deploy) on the left-hand menu, fill in the required fields and click on "Generate Config File" 
 
 
+## Installation
+
+Using [npm](https://npmjs.org):
+
+```bash
+$ npm i @granulate/gmaestro-eks-blueprints-addon
+```
+
 ## Usage
 
 ```typescript
