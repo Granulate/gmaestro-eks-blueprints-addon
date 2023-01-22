@@ -74,13 +74,13 @@ Copy from the Deployment section `MAESTRO_SERVICE_NAME` value
 
 The namespace where gMaestro will be installed. `default` namespace is used as default.
 
-#### `grafanaMetricsAuthKey: string`
+#### `grafanaMetricsSecretName: string`
 
-Copy from the ConfigMap section `prometheus.configs.remote_write.basic_auth.password` value.
+Create a secret in AWS copy from the ConfigMap section `prometheus.configs.remote_write.basic_auth.password` value.
 
-#### `grafanaLogsAuthKey: string`
+#### `grafanaLogsSecretName: string`
 
-Copy from the ConfigMap section `loki.configs.clients.basic_auth.password` value
+Create a secret in AWS copy from the ConfigMap section `loki.configs.clients.basic_auth.password` value
 
 ## Support
 
