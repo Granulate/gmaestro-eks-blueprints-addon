@@ -1,6 +1,6 @@
 {
   "name": "@granulate/gmaestro-eks-blueprints-addon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cost optimization solution for EKS cluster",
   "main": "lib/index.js",
   "types": "lib",
@@ -8,7 +8,7 @@
     "build": "tsc -p ."
   },
   "dependencies": {
-    "@aws-quickstart/eks-blueprints": "latest",
+    "@aws-quickstart/eks-blueprints": "^1.5.4",
     "aws-cdk": "^2.61.1",
     "constructs": "^10.1.223"
   },
@@ -22,8 +22,8 @@
   "keywords": [
     "gmaestro"
   ],
-  "author": "granulate",
-  "license": "ISC",
+  "author": "Itay Kirshenboim <itay.kirshenboim@granulate.io>",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Granulate/gmaestro-eks-blueprints-addon/issues"
   },
