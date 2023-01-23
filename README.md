@@ -30,10 +30,11 @@ $ npm i @granulate/gmaestro-eks-blueprints-addon
 import 'source-map-support/register';
 import * as CDK from 'aws-cdk-lib';
 import * as blueprints from '@aws-quickstart/eks-blueprints';
+import {GmaestroAddOn} from '@granulate/gmaestro-eks-blueprints-addon';
 
 const app = new cdk.App();
 
-const addOn = new blueprints.addons.Gmaestro({
+const addOn = new GmaestroAddOn({
         b64ClientId: "<client id>",
         clientName: "<client name>",
         clusterName: "<cluster name>",
