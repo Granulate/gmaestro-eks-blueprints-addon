@@ -13,9 +13,9 @@ export interface GmaestroAddOnProps extends HelmAddOnUserProps {
     namespace?: string;
 
     /**
-     * granulate base 64 id.
+     * client id secret name as defined in AWS Secrets Manager (plaintext).
      */
-    b64ClientId: string;
+    clientIdSecretName: string;
 
     /**
      * plain text client name.
@@ -60,9 +60,8 @@ export class GmaestroAddOn extends HelmAddOn {
     constructor(props?: GmaestroAddOnProps) {
         super({...defaultProps, ...props});
         this.options = this.props as GmaestroAddOnProps;
-        if (!this.options.b64ClientId || !this.options.clientName || !this.options.clusterName || !this.options.grafanaMetricsSecretName || !this.options.grafanaLogsSecretName) {
-            throw new Error(`b64ClientId, clientName, clusterName, grafanaMetricsSecretName, grafanaLogsSecretName are Gmaestro addon required fields. 
-            Please copy those values form the gmaestro deployment Yaml file (Signup to gmaestro before and generate yaml from the Deploy page).`);
+        if (!this.options.clientIdSecretName || !this.options.clientName || !this.options.clusterName || !this.options.grafanaMetricsSecretName || !this.options.grafanaLogsSecretName) {
+            throw new Error(`clientIdSecretName, clientName, clusterName, grafanaMetricsSecretName, grafanaLogsSecretName are Gmaestro addon required fields.`);
         }
     }
 
@@ -90,7 +89,8 @@ async function populateValues(helmOptions: GmaestroAddOnProps, region: string): 
     const values = helmOptions.values ?? {};
 
     setPath(values, "namespace", helmOptions.namespace);
-    setPath(values, "b64ClientId", helmOptions.b64ClientId);
+    const clientIdSecretValue = await getSecretValue(helmOptions.clientIdSecretName!, region);
+    setPath(values, "b64ClientId", clientIdSecretValue);
     setPath(values, "clientName", helmOptions.clientName);
     setPath(values, "clusterName", helmOptions.clusterName);
     const grafanaMetricsSecretValue = await getSecretValue(helmOptions.grafanaMetricsSecretName!, region);

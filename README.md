@@ -35,7 +35,7 @@ import {GmaestroAddOn} from '@granulate/gmaestro-eks-blueprints-addon';
 const app = new cdk.App();
 
 const addOn = new GmaestroAddOn({
-        b64ClientId: "<client id>",
+        clientIdSecretName: "<client id secret name>", // Create and copy from gMaestro deployment yaml
         clientName: "<client name>",
         clusterName: "<cluster name>",
         namespace: "<namespace>",
@@ -67,9 +67,9 @@ The first rightsizing recommendations may take up to 5 minutes to load.
 ## `gMaestroAddOn` Required (props)
 Take the following parameter from the sample YAML file that was downloaded.
 
-#### `b64ClientId: string`
+#### `clientIdSecretName: string`
 
-Copy from the Deployment section `MAESTRO_CLIENT_ID` value
+Create a secret (as a plaintext) in AWS copy its value from the Deployment section `MAESTRO_CLIENT_ID` 
 
 #### `clientName: string`
 
@@ -85,11 +85,11 @@ The namespace where gMaestro will be installed. `default` namespace is used as d
 
 #### `grafanaMetricsSecretName: string`
 
-Create a secret in AWS copy from the ConfigMap section `prometheus.configs.remote_write.basic_auth.password` value.
+Create a secret (as a plaintext) in AWS copy its value from the ConfigMap section `prometheus.configs.remote_write.basic_auth.password` value.
 
 #### `grafanaLogsSecretName: string`
 
-Create a secret in AWS copy from the ConfigMap section `loki.configs.clients.basic_auth.password` value
+Create a secret (as a plaintext) in AWS copy its value from the ConfigMap section `loki.configs.clients.basic_auth.password` value
 
 ## Support
 
