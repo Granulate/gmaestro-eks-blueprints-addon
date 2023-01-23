@@ -30,14 +30,12 @@ export interface GmaestroAddOnProps extends HelmAddOnUserProps {
     /**
      * grafana metrics secret name as defined in AWS Secrets Manager (plaintext).
      * This allows us to store the gmaestro metrics in our grafana account.
-     * Note: at present, change of password may require to rerun the addon.
      */
     grafanaMetricsSecretName: string;
 
     /**
      * grafana logs secret name as defined in AWS Secrets Manager (plaintext).
      * This allows us to store the gmaestro logs in our grafana account.
-     * Note: at present, change of password may require to rerun the addon.
      */
     grafanaLogsSecretName: string;
 }
