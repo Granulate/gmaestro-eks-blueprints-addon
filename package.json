@@ -1,6 +1,6 @@
 {
   "name": "@granulate/gmaestro-eks-blueprints-addon",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "cost optimization solution for EKS cluster",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
