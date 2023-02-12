@@ -101,7 +101,7 @@ The secret name from the Prerequisite section 3.iii.
 
 ## Security issue
 
-As the implementation uses getSecret(), the secret parameters will be displayed as plain text in the CloudFormation. These secrets are gMaestro’s secrets which don’t affect the user.
+As the implementation uses getSecretValue(), the secret parameters will be displayed as plain text in the CloudFormation. These secrets are gMaestro’s secrets which don’t affect the user.
 This issue will be mitigated and updated in the following weeks.
 
 ## Support
