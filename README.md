@@ -101,7 +101,11 @@ The secret name from the Prerequisite section 3.iii.
 
 ## Security issue
 
-As the implementation uses getSecretValue(), the secret parameters will be displayed as plain text in the CloudFormation. These secrets are gMaestro’s secrets which don’t affect the user.
+1. The implementation requires access to the AWS Secrets Manager at build time to retrieve secret values.
+2. The secret values will be stored as plain text in the resulting CloudFormation stack, meaning that any user with access to view CloudFormation stack can gain access to these secrets.
+
+Note: These secrets are specific to gMaestro and don't affect customer account beyond the scope of the gMaestro add-on.
+
 This issue will be mitigated and updated in the following weeks.
 
 ## Support
