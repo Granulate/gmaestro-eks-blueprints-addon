@@ -87,13 +87,6 @@ Copy from the Deployment section `MAESTRO_SERVICE_NAME` value
 
 The namespace where gMaestro will be installed. `default` namespace is used as default.
 
-#### `grafanaMetricsSecretName: string`
-
-The secret name from the Prerequisite section 3.ii.
-
-#### `grafanaLogsSecretName: string`
-
-The secret name from the Prerequisite section 3.iii.
 
 ## Security issue
 
