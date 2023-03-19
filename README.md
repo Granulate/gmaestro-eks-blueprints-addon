@@ -19,7 +19,7 @@ Before using gMaestro, you need to:
 
 ![GmaestroConfigFile](assets/images/gmaestro-config-file.png)
 
-3. Create 1 secret (as a plaintext) in AWS Secrets Manager copy its value from the following place:
+3. Create a secret (as a plaintext) in AWS Secrets Manager copy its value from the following place:
    1. Deployment section `MAESTRO_CLIENT_ID`
 
 ## Installation
@@ -95,6 +95,7 @@ The namespace where gMaestro will be installed. `default` namespace is used as d
 
 Note: This secret is specific to gMaestro and don't affect customer account beyond the scope of the gMaestro add-on.
 
+This issue will be mitigated and updated in the following weeks.
 
 ## Support
 
