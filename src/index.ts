@@ -26,18 +26,6 @@ export interface GmaestroAddOnProps extends HelmAddOnUserProps {
      * plain text cluster name.
      */
     clusterName: string;
-
-    /**
-     * grafana metrics secret name as defined in AWS Secrets Manager (plaintext).
-     * This allows us to store the gmaestro metrics in our grafana account.
-     */
-    grafanaMetricsSecretName: string;
-
-    /**
-     * grafana logs secret name as defined in AWS Secrets Manager (plaintext).
-     * This allows us to store the gmaestro logs in our grafana account.
-     */
-    grafanaLogsSecretName: string;
 }
 
 /**
@@ -60,8 +48,8 @@ export class GmaestroAddOn extends HelmAddOn {
     constructor(props?: GmaestroAddOnProps) {
         super({...defaultProps, ...props});
         this.options = this.props as GmaestroAddOnProps;
-        if (!this.options.clientIdSecretName || !this.options.clientName || !this.options.clusterName || !this.options.grafanaMetricsSecretName || !this.options.grafanaLogsSecretName) {
-            throw new Error(`clientIdSecretName, clientName, clusterName, grafanaMetricsSecretName, grafanaLogsSecretName are Gmaestro addon required fields.`);
+        if (!this.options.clientIdSecretName || !this.options.clientName || !this.options.clusterName) {
+            throw new Error(`clientIdSecretName, clientName, clusterName are Gmaestro addon required fields.`);
         }
     }
 
@@ -93,10 +81,6 @@ async function populateValues(helmOptions: GmaestroAddOnProps, region: string): 
     setPath(values, "b64ClientId", clientIdSecretValue);
     setPath(values, "clientName", helmOptions.clientName);
     setPath(values, "clusterName", helmOptions.clusterName);
-    const grafanaMetricsSecretValue = await getSecretValue(helmOptions.grafanaMetricsSecretName!, region);
-    const grafanaLogsSecretValue = await getSecretValue(helmOptions.grafanaLogsSecretName!, region);
-    setPath(values, "secrets.grafanaMetricsAuthKey", grafanaMetricsSecretValue);
-    setPath(values, "secrets.grafanaLogsAuthKey", grafanaLogsSecretValue);
 
     return values;
 }
