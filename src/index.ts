@@ -1,6 +1,6 @@
 import {Construct} from 'constructs';
-import {ClusterInfo , Values, HelmAddOn, HelmAddOnProps, HelmAddOnUserProps} from "@aws-quickstart/eks-blueprints";
-import {createNamespace, getSecretValue, setPath} from "@aws-quickstart/eks-blueprints/dist/utils";
+import {ClusterInfo , Values, HelmAddOn, HelmAddOnProps, HelmAddOnUserProps, MetricsServerAddOn} from "@aws-quickstart/eks-blueprints";
+import {createNamespace, dependable, getSecretValue, setPath} from "@aws-quickstart/eks-blueprints/dist/utils";
 
 /**
  * Configuration options for add-on.
@@ -16,11 +16,6 @@ export interface GmaestroAddOnProps extends HelmAddOnUserProps {
      * client id secret name as defined in AWS Secrets Manager (plaintext).
      */
     clientIdSecretName: string;
-
-    /**
-     * plain text client name.
-     */
-    clientName: string;
 
     /**
      * plain text cluster name.
@@ -48,11 +43,12 @@ export class GmaestroAddOn extends HelmAddOn {
     constructor(props?: GmaestroAddOnProps) {
         super({...defaultProps, ...props});
         this.options = this.props as GmaestroAddOnProps;
-        if (!this.options.clientIdSecretName || !this.options.clientName || !this.options.clusterName) {
-            throw new Error(`clientIdSecretName, clientName, clusterName are Gmaestro addon required fields.`);
+        if (!this.options.clientIdSecretName || !this.options.clusterName) {
+            throw new Error(`clientIdSecretName and clusterName are Gmaestro addon required fields.`);
         }
     }
 
+    @dependable(MetricsServerAddOn.name)
     async deploy(clusterInfo: ClusterInfo): Promise<Construct> {
         let values: Values = await populateValues(this.options, clusterInfo.cluster.stack.region);
         if (this.options.namespace) {
@@ -79,7 +75,6 @@ async function populateValues(helmOptions: GmaestroAddOnProps, region: string): 
     setPath(values, "namespace", helmOptions.namespace);
     const clientIdSecretValue = await getSecretValue(helmOptions.clientIdSecretName!, region);
     setPath(values, "b64ClientId", clientIdSecretValue);
-    setPath(values, "clientName", helmOptions.clientName);
     setPath(values, "clusterName", helmOptions.clusterName);
 
     return values;
