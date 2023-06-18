@@ -78,6 +78,10 @@ The secret name from the Prerequisite section 3.i.
 
 Copy from the Deployment section `MAESTRO_SERVICE_NAME` value
 
+#### `createNamespace: string` 
+
+If you want CDK to create the namespace for you
+
 #### `namespace: string` (optional)
 
 The namespace where gMaestro will be installed. `default` namespace is used as default.
