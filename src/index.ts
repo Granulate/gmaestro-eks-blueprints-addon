@@ -1,6 +1,6 @@
 import {Construct} from 'constructs';
-import {ClusterInfo , Values, HelmAddOn, HelmAddOnProps, HelmAddOnUserProps, MetricsServerAddOn} from "@aws-quickstart/eks-blueprints";
-import {createNamespace, dependable, getSecretValue, setPath} from "@aws-quickstart/eks-blueprints/dist/utils";
+import {ClusterInfo , Values, HelmAddOn, HelmAddOnProps, HelmAddOnUserProps} from "@aws-quickstart/eks-blueprints";
+import {createNamespace, getSecretValue, setPath} from "@aws-quickstart/eks-blueprints/dist/utils";
 
 /**
  * Configuration options for add-on.
@@ -21,6 +21,11 @@ export interface GmaestroAddOnProps extends HelmAddOnUserProps {
      * plain text cluster name.
      */
     clusterName: string;
+
+    /**
+     * To Create Namespace using CDK
+     */
+    createNamespace?: boolean;
 }
 
 /**
@@ -48,18 +53,20 @@ export class GmaestroAddOn extends HelmAddOn {
         }
     }
 
-    @dependable(MetricsServerAddOn.name)
     async deploy(clusterInfo: ClusterInfo): Promise<Construct> {
         let values: Values = await populateValues(this.options, clusterInfo.cluster.stack.region);
-        if (this.options.namespace) {
-            const namespace = createNamespace(this.options.namespace!, clusterInfo.cluster, true);
-            const chart = this.addHelmChart(clusterInfo, values);
-            chart.node.addDependency(namespace);
-            return Promise.resolve(chart);
+        const cluster = clusterInfo.cluster;
+        if( this.options.createNamespace == true){
+          // Let CDK Create the Namespace
+          const namespace = createNamespace(this.options.namespace! , cluster);
+          const chart = this.addHelmChart(clusterInfo, values);
+          chart.node.addDependency(namespace);
+          return Promise.resolve(chart);
+
         } else {
-            //Namespace is already created
-            const chart = this.addHelmChart(clusterInfo, values);
-            return Promise.resolve(chart);
+          //Namespace is already created
+          const chart = this.addHelmChart(clusterInfo, values);
+          return Promise.resolve(chart);
         }
     }
 }
